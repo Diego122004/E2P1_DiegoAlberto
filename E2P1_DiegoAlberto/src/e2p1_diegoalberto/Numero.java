@@ -30,6 +30,7 @@ public class Numero {
         return numero;
     }
     
+   
     public char numToChar( int numero){
         if (numero >= 0 || numero<10) {
             numero+=48;
@@ -39,6 +40,43 @@ public class Numero {
         char num = (char)numero;
     
     return num;
+    }
+    
+    
+
+    public int charToNum(char caracter) {
+        int numero;
+        if (caracter >= '0' && caracter <= '9') {
+            numero = caracter - '0';
+        } else {
+            numero = caracter - 'a' + 10;
+        }
+        return numero;
+    }
+
+    public String decToBase(int decimal) {
+        StringBuilder resultado = new StringBuilder();
+        int cociente = decimal;
+        while (cociente > 0) {
+            int residuo = cociente % base;
+            char caracter = numToChar(residuo);
+            resultado.insert(0, caracter);
+            cociente = cociente / base;
+        }
+        return resultado.toString();
+    }
+
+    public int baseToDec(String base) {
+        int decimal = 0;
+        int longitud = base.length();
+        int exponente = 0;
+        for (int i = longitud - 1; i >= 0; i--) {
+            char caracter = base.charAt(i);
+            int valor = charToNum(caracter);
+            decimal += valor * Math.pow(this.base, exponente);
+            exponente++;
+        }
+        return decimal;
     }
     
 }

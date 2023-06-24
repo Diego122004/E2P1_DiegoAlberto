@@ -6,6 +6,7 @@ package e2p1_diegoalberto;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -133,10 +134,29 @@ public class E2frame extends javax.swing.JFrame {
             switch(opcion){
                 
                 case 1:{
-                    num = Agregarnum();
+                    num = agregarNum();
+                   
+                    System.out.println("Desea ingresar otro 1/2 ");
+                     int seguir = sc.nextInt();
+                    while(seguir == 1){
+                    num = agregarNum();
+                }
                 }
                 case 2:{
+                    eliminarNumero();
                 }
+                System.out.println("Desea ingresar otro número? (1: Sí / 2: No)");
+            int seguir = sc.nextInt();
+            
+            if (seguir == 2) {
+                break;
+            }
+            
+            System.out.println("1. Agregar número");
+            System.out.println("2. Eliminar número");
+            opcion = sc.nextInt();
+        
+    
             
             }
         
@@ -190,21 +210,35 @@ System.exit(WIDTH);        // TODO add your handling code here:
             }
         });
     }
-    public static ArrayList Agregarnum(){
-        System.out.println("Ingrese el numero a agregar");
-        int numero = sc.nextInt();
-        String numlet;
-        numlet = scs.nextLine();
-        
-        
-        
-        
-        num.add(new Numero(numero,numlet));
-        
-        return num;
+   public static ArrayList<Numero> agregarNum() {
+    System.out.println("Ingrese el número a agregar");
+    int numero = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número:"));
+    String numlet = JOptionPane.showInputDialog("Ingrese la representación del número:");
     
+    num.add(new Numero(numero, numlet));
     
+    return num;
+}
+
+private void eliminarNumero() {
+    int numero = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número a eliminar:"));
+    boolean encontrado = false;
+
+    for (int i = 0; i < num.size(); i++) {
+        if (num.get(i).getNumero() == numero) {
+            num.remove(i);
+            encontrado = true;
+            break;
+        }
     }
+
+    if (encontrado) {
+        JOptionPane.showMessageDialog(null, "Número eliminado exitosamente.");
+    } else {
+        JOptionPane.showMessageDialog(null, "El número no se encuentra en la lista.");
+    }
+}
+    
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
